@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="Todo">
+<head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Todo App</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px;height:400px;}
+        #todo-container         {height: 100%;overflow-y: auto;border: 1px solid grey;margin-top: 10px;}
+        .line-through           {text-decoration : line-through;}
+        i.fa.fa-archive.fa-fw   {color: #6E9C6E;}        
+        i.fa.fa-trash.fa-fw     {color: rgb(173, 65, 65);}
+    </style> 
+    
+</head>
+<body ng-controller="mainController">
+    <div class="container">        
+        <div class="jumbotron text-center">
+            <h1>Todo's List</h1>
+        </div>
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">                        
+                        <input type="text" class="form-control input-lg text-center" placeholder="Enter an Item" ng-model="formData.text">
+                    </div>                    
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>                    
+                </form>
+            </div>
+        </div>       
+        <div id="todo-list" class="row">
+            <div class="col-sm-4 col-sm-offset-4" id="todo-container">                
+                <div class="checkbox" ng-repeat="todo in todos">
+                    <i class="fa fa-archive fa-fw" ng-click="archiveTodo(todo._id)" title="Archive this item"></i>
+                    <i class="fa fa-trash fa-fw" ng-click="deleteTodo(todo._id)" title="Delete"></i>
+                    <label>
+                        <input type="checkbox" ng-change="updateTodo(todo)" ng-model="todo.done"> <span ng-class="{'line-through':todo.done}">{{ todo.text }}</span>
+                    </label>
+                </div>
+
+            </div>
+        </div>    
+
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="javascripts/core.js"></script>
+
+</body>
+</html>
