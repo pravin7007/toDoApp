@@ -50,8 +50,8 @@ function mainController($scope, $http) {
             });
     };
 
-    $scope.archiveTodo = function(todo) {              
-        $http.put('/todos/' + JSON.stringify(todo))
+    $scope.archiveTodo = function(todo_id) {              
+        $http.put('/archTodos/' + todo_id)
             .success(function(data) {
                 $scope.todos = data;                
             })

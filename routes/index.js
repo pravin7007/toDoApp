@@ -52,7 +52,7 @@
 						res.send(err);
 
 					// get and return all the todos after you create another
-					Todo.find(function(err, todos) {
+					Todo.find({archive:false},function(err, todos) {
 						if (err)
 							res.send(err)
 						res.json(todos);
@@ -73,6 +73,24 @@
 				}, function(err, todo) {
 					if (err)
 						res.send(err);
+				});
+			});
+
+			router.put('/archTodos/:todo_id', function(req, res) {																
+				Todo.update(
+				{
+					_id : req.params.todo_id
+				},
+				{
+					$set: { archive: true }
+				}, function(err, todo) {
+					if (err)
+						res.send(err);
+					Todo.find({archive:false},function(err, todos) {
+						if (err)
+							res.send(err)
+						res.json(todos);
+					});
 				});
 			});
 
